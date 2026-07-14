@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EchoLabs – Privacy Policy</title>
+<style>
+  :root {
+    --bg:#0e0e10; --surface:#18181b; --border:#2a2a30;
+    --text:#efeff1; --muted:#adadb8; --accent:#a970ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.65;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .updated {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 40px 0 12px;
+    color: var(--text);
+  }
+  p, li {
+    font-size: 14px;
+    color: var(--text);
+  }
+  ul {
+    padding-left: 20px;
+    margin: 12px 0;
+  }
+  li {
+    margin-bottom: 8px;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .box strong { color: var(--text); }
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  code {
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="badge">🎙️ EchoLabs</div>
+    <h1>Privacy Policy</h1>
+    <div class="updated">Last updated: July 2026</div>
+  </header>
+
+  <p>
+    EchoLabs is a Twitch Extension that lets viewers on a channel send text-to-speech messages
+    that are read aloud and shown on the broadcaster's stream. This policy describes what data
+    is processed, why, and who it is shared with.
+  </p>
+
+  <h2>1. What data we process</h2>
+
+  <p><strong>From viewers (Panel component):</strong></p>
+  <ul>
+    <li>The message you type (sent to ElevenLabs to generate the spoken audio)</li>
+    <li>The voice you select</li>
+    <li>Optionally your Twitch display name — but only if you explicitly grant Twitch's
+        "Share your identity" permission prompt. If you decline, an anonymous, randomly
+        generated label is shown instead, which cannot be traced back to your Twitch account.</li>
+    <li>Your Bits or Channel Points transaction is processed entirely by Twitch itself —
+        we never receive your payment or account details.</li>
+    <li>Your language preference is stored locally in your browser (localStorage) so the
+        extension shows up in your language on your next visit. This information never
+        leaves your browser.</li>
+  </ul>
+
+  <p><strong>From the broadcaster (Config panel):</strong></p>
+  <ul>
+    <li>The broadcaster's ElevenLabs API key is stored securely on our server and is never
+        exposed to viewers.</li>
+    <li>All settings the broadcaster configures (voices, prices, word filter, overlay design,
+        cooldowns, access restrictions) are stored server-side to run the extension for that
+        channel.</li>
+    <li>Broadcasters can optionally connect their own Discord webhook to receive a notification
+        for every TTS message sent. If enabled, the message content and (if shared) the viewer's
+        name are sent to the Discord server the broadcaster chose.</li>
+  </ul>
+
+  <p><strong>Automatically:</strong></p>
+  <ul>
+    <li>To prevent abuse (e.g. enforcing cooldowns, rate limiting), a requesting device's IP
+        address may be processed briefly server-side. It is not stored long-term or used for
+        any other purpose.</li>
+  </ul>
+
+  <h2>2. How we use this data</h2>
+  <ul>
+    <li>To convert your text message into spoken audio and play it on the stream</li>
+    <li>To display your message and (optional) display name in the broadcaster's overlay</li>
+    <li>To enforce the broadcaster's configured settings (word filter, cooldowns, access
+        permissions, maximum message length)</li>
+    <li>To operate and maintain the extension</li>
+  </ul>
+  <p>We do not sell data to third parties and do not use your messages for advertising or to
+     train AI models.</p>
+
+  <h2>3. Third-party sharing</h2>
+  <div class="box">
+    <p><strong>ElevenLabs</strong> (speech synthesis) — receives the message text and the
+       broadcaster's API key to generate the audio.
+       <a href="https://elevenlabs.io/privacy" target="_blank" rel="noopener">ElevenLabs Privacy Policy ↗</a></p>
+  </div>
+  <div class="box">
+    <p><strong>Twitch</strong> — the platform the extension runs on. Bits and Channel Points
+       transactions are handled entirely by Twitch.
+       <a href="https://www.twitch.tv/p/en/legal/privacy-notice/" target="_blank" rel="noopener">Twitch Privacy Notice ↗</a></p>
+  </div>
+  <div class="box">
+    <p><strong>Railway</strong> (hosting) — our server and hosting provider, where broadcaster
+       configuration data is stored.
+       <a href="https://railway.com/legal/privacy" target="_blank" rel="noopener">Railway Privacy Policy ↗</a></p>
+  </div>
+
+  <h2>4. Data retention</h2>
+  <ul>
+    <li>Message text and the audio generated from it are processed in real time and
+        <strong>not stored permanently</strong> — they are discarded after playback in the overlay.</li>
+    <li>Broadcaster configuration data remains stored until the broadcaster changes it or
+        requests deletion (see Contact below).</li>
+  </ul>
+
+  <h2>5. Children's privacy</h2>
+  <p>
+    EchoLabs is not directed at children under the age of 13. Twitch's own age requirements
+    for using Extensions apply.
+  </p>
+
+  <h2>6. Your rights</h2>
+  <p>
+    You can request deletion of your broadcaster configuration data (as a broadcaster) or
+    information about data processed about you (as a viewer) at any time by contacting us
+    using the address below.
+  </p>
+
+  <h2>7. Changes to this policy</h2>
+  <p>
+    We may update this privacy policy occasionally, for example when the extension's features
+    change. The date above reflects the most recently published version.
+  </p>
+
+  <h2>8. Contact</h2>
+  <p>
+    For privacy questions or deletion requests, contact:
+    <strong><code>[YOUR-CONTACT-EMAIL-HERE]</code></strong>
+  </p>
+
+  <footer>
+    EchoLabs · Text-to-Speech Twitch Extension
+  </footer>
+
+</div>
+</body>
+</html>
