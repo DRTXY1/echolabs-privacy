@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EchoLabs – Reviewer Walkthrough</title>
+<style>
+  :root {
+    --bg:#0e0e10; --surface:#18181b; --border:#2a2a30;
+    --text:#efeff1; --muted:#adadb8; --accent:#a970ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.65;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .updated {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 40px 0 12px;
+    color: var(--text);
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 24px 0 10px;
+    color: var(--text);
+  }
+  p, li {
+    font-size: 14px;
+    color: var(--text);
+  }
+  ul, ol {
+    padding-left: 20px;
+    margin: 12px 0;
+  }
+  li {
+    margin-bottom: 8px;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .box strong { color: var(--text); }
+  .quickstart {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 16px 0 8px;
+  }
+  .quickstart-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 12px;
+  }
+  pre {
+    background: #0a0a0b;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--text);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  code {
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+  }
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="badge">🎙️ EchoLabs</div>
+    <h1>Reviewer Walkthrough</h1>
+    <div class="updated">For Twitch Developer Console review</div>
+  </header>
+
+  <p>
+    EchoLabs is a Twitch Extension that lets viewers pay with Bits or Channel Points to have
+    a short text message read aloud via AI text-to-speech, played live on stream through an
+    OBS browser-source overlay. Broadcasters choose their own TTS provider (ElevenLabs, TTS
+    Monster, Azure, Google Cloud, Amazon Polly, OpenAI, Cartesia, Fish Audio, Deepgram, or
+    LMNT) and supply their own API key for it — EchoLabs itself never charges anything; all
+    TTS costs are billed directly by the broadcaster's chosen provider.
+  </p>
+
+  <p>
+    The block below is meant to be copied into the Twitch Developer Console's "Testing
+    Instructions" field. The detailed sections that follow are for reference, or for a
+    reviewer who wants more context on any specific step.
+  </p>
+
+  <h2>Quick Start</h2>
+  <div class="quickstart">
+    <div class="quickstart-label">Copy into Testing Instructions</div>
+    <pre><code>HOW TO TEST ECHOLABS
+
+EchoLabs lets viewers pay with Bits (or Channel Points, if the broadcaster connects
+their channel) to have a short text message read aloud via AI text-to-speech, played
+through an OBS browser-source overlay.
+
+TEST CREDENTIALS (ElevenLabs API key, dedicated to this review):
+sk_[PASTE YOUR TEST KEY HERE]
+
+STEP-BY-STEP:
+1. Activate the extension on a test channel (Creator Dashboard > Extensions).
+2. Open the Configuration view (the "Configure" link Twitch shows once the extension
+   is activated). Under "Settings > TTS Providers", the ElevenLabs tab is selected by
+   default — paste the API key above and click "Save &amp; validate". The rest of the
+   panel unlocks once the key is confirmed.
+3. Click "Add voice" and add any voice from the list shown. Set a Bits price
+   (e.g. 100).
+4. Copy the "OBS Browser Source" link shown at the top of the Configuration panel and
+   open it directly in a new browser tab — a plain browser tab is enough to see the
+   result, OBS itself is not required for testing.
+5. Open the extension's viewer panel (the popup Twitch shows under the video player,
+   or accessible via the panel/mobile view). Click the voice you just added.
+6. The panel shows a "Grant Permissions" button/prompt. Click it once — this opens
+   Twitch's own native identity-share dialog. Sharing identity is required before any
+   message can be sent (enforced server-side, not just in the UI).
+7. Type a short test message and confirm payment through Twitch's native Bits dialog.
+8. Within a few seconds, the message audio plays and the text appears visually in the
+   browser tab opened in step 4 — that confirms the full flow works end to end.
+
+Every setting in the Configuration panel saves automatically as you type/click —
+there is no separate "Save" button, only a small "Saved" status indicator.
+
+Questions during review: [YOUR EMAIL HERE]</code></pre>
+  </div>
+
+  <h2>1. What you'll need before testing</h2>
+  <ul>
+    <li>A Twitch channel with the extension installed/activated (Creator Dashboard →
+        Extensions → My Extensions → Activate on a test channel).</li>
+    <li>OBS (or any software that supports a "Browser Source"), since the TTS audio and
+        on-screen message only appear there — the extension panel itself is silent by design
+        (it's a config UI, not the output surface). A plain browser tab works too for testing
+        purposes; OBS is only needed for an actual broadcast.</li>
+    <li>An account with at least one supported TTS provider and an API key for it.
+        ElevenLabs' free tier is enough for a quick test. The Configuration panel requires at
+        least one valid provider key before it lets you add voices or accept any payment.</li>
+  </ul>
+
+  <h2>2. Finding the Configuration page</h2>
+  <p>
+    The extension is set up with <strong>"Custom/My Own Service"</strong> as its
+    configuration hosting method (Capabilities tab in the Developer Console), so Twitch shows
+    a <strong>"Configure"</strong> link/button next to the extension once it's activated on a
+    channel — that link opens our own Configuration page (<code>config.html</code>). If that
+    link isn't visible, double-check the extension is actually activated (not just installed)
+    on the test channel.
+  </p>
+
+  <h2>3. Broadcaster setup (Configuration panel)</h2>
+  <ol>
+    <li>Open the extension's <strong>Configuration</strong> view via the "Configure" link
+        described above.</li>
+    <li>Go to the <strong>Settings</strong> tab → <strong>TTS Providers</strong> card.
+        Providers are shown as a row of tabs, ElevenLabs first. Click a tab, enter the
+        required field(s) for that provider (just an API key for most; Azure also needs a
+        region, Amazon Polly needs an access key pair + region). Each tab has a
+        <strong>"How do I get the credentials?"</strong> link that opens a short guide with a
+        direct link to that provider's key page.</li>
+    <li>Click <strong>"Save &amp; validate"</strong>. The panel checks the key live against
+        the provider's API before saving — an invalid key shows a clear error and nothing is
+        stored.</li>
+    <li>Go to the <strong>Voices</strong> tab, click <strong>"Add voice"</strong>, pick the
+        provider (if more than one is configured) and select a voice from the list — pulled
+        live from that provider's own voice library. Set a <strong>Bits price</strong> for it
+        (e.g. 100).</li>
+    <li>Every change in this panel <strong>saves automatically</strong> as you type or toggle
+        something — there is no separate "Save" button anywhere. A small status indicator
+        ("Saved…") confirms this.</li>
+    <li>(Optional) Set a Channel Points price on the same voice. This only becomes active once
+        the channel is connected to Twitch via the "Channel Points" card and a matching Custom
+        Reward syncs successfully — see the limitation note in section 7.</li>
+  </ol>
+
+  <h2>4. OBS Browser Source setup</h2>
+  <p>
+    The Configuration panel's header shows a ready-to-copy <strong>OBS Browser Source</strong>
+    link, unique to that channel. Add it in OBS as a Browser Source (recommended size
+    1920×1080), or simply open it in a normal browser tab for testing — this is where the TTS
+    audio plays and the animated on-screen message/voice card appears when a viewer redeems.
+  </p>
+  <p>Example of the link format (this one is channel-specific and will not work on a different test channel — every broadcaster's panel shows their own):</p>
+  <pre><code>https://6vw92ljoheooxl8ltin1sv7fgv8146.ext-twitch.tv/6vw92ljoheooxl8ltin1sv7fgv8146/0.0.1/f1f786772bf0fa3987402ce5c9671c75/live_config.html?t=39e2308819b792a6abe4ba96efffdd36</code></pre>
+
+  <h2>5. Testing the viewer flow</h2>
+  <ol>
+    <li>Open the extension's viewer panel (mobile view, or the panel view shown under the
+        video player).</li>
+    <li>Pick a voice tile — each shows its Bits price (or "Free" if priced at 0, or
+        "Unavailable" if it's Channel-Points-only and the channel isn't connected yet).</li>
+    <li><strong>Identity step:</strong> the first time, the panel shows a
+        <strong>"Grant Permissions"</strong> button. Clicking it opens Twitch's own native
+        identity-share dialog. Sharing identity is required before any message can be sent —
+        this is enforced <strong>server-side</strong>, not just hidden/shown in the UI, so it
+        cannot be bypassed by manipulating the client.</li>
+    <li><strong>Optional "Submit Anonymously" checkbox:</strong> appears only once identity
+        has been shared, and only if the broadcaster has turned this option on. It hides the
+        sender's name from the on-stream overlay display — it does <strong>not</strong> bypass
+        identity verification; the server always knows exactly who sent the message, for
+        moderation and cooldown purposes.</li>
+    <li>Type a short message and confirm the Bits payment through Twitch's native Bits
+        dialog.</li>
+    <li>Confirm the message is read aloud and displayed in the OBS Browser Source (or the
+        plain browser tab from section 4) within a few seconds.</li>
+    <li><strong>Broadcaster pause test:</strong> in the Configuration panel, click the pause
+        pill next to the language selector (top right, "Pause extension"). Confirm the viewer
+        panel immediately shows a clear "paused" notice and no longer allows sending messages,
+        until unpaused again.</li>
+  </ol>
+
+  <h2>6. Data &amp; privacy notes for review</h2>
+  <div class="box">
+    <p>The extension requires Twitch identity sharing (<code>user_id</code>) to send a
+    message — enforced on every server request, not just in the UI, and never bypassed by the
+    "Anonymous" display option described above.</p>
+  </div>
+  <div class="box">
+    <p>No TTS message text is stored beyond what's needed for moderation/cooldown logic and
+    (optionally, only if the broadcaster enables it) a leaderboard of top senders.</p>
+  </div>
+  <div class="box">
+    <p>TTS provider API keys are entered by the broadcaster and stored server-side only; they
+    are never exposed to viewers or returned in full to the browser — the Configuration panel
+    only ever shows a masked placeholder (••••••••) for an already-saved key.</p>
+  </div>
+
+  <h2>7. Known platform-level limitations (not bugs)</h2>
+  <ul>
+    <li><strong>Channel Points</strong> require the connected channel to have Twitch
+        <strong>Affiliate or Partner</strong> status — a Twitch platform restriction on Custom
+        Rewards, not something the extension can work around. On a non-eligible test channel,
+        the "Connect with Twitch" flow in the Configuration panel surfaces a clear in-panel
+        error explaining this rather than failing silently.</li>
+    <li>The OBS Browser Source link is per-channel (it carries an embedded, channel-specific
+        token), so it cannot be shared or reused across different test channels.</li>
+  </ul>
+
+  <h2>8. Contact</h2>
+  <p>
+    <strong><code>[FILL IN — support email / contact method for the review team]</code></strong>
+  </p>
+
+  <footer>
+    EchoLabs · Reviewer Walkthrough
+  </footer>
+
+</div>
+</body>
+</html>
