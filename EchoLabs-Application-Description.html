@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EchoLabs – Application Description</title>
+<style>
+  :root {
+    --bg:#0e0e10; --surface:#18181b; --border:#2a2a30;
+    --text:#efeff1; --muted:#adadb8; --accent:#a970ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.65;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .updated {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 40px 0 12px;
+    color: var(--text);
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 22px 0 8px;
+    color: var(--text);
+  }
+  p, li {
+    font-size: 14px;
+    color: var(--text);
+  }
+  ul {
+    padding-left: 20px;
+    margin: 12px 0;
+  }
+  li {
+    margin-bottom: 8px;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .box strong { color: var(--text); }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #0e0e10;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  code {
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badge">🎙️ EchoLabs</div>
+    <h1>Application Description</h1>
+    <div class="updated">Last updated: August 2026</div>
+  </header>
+
+  <p>
+    EchoLabs is a Twitch Extension that brings AI text-to-speech to a broadcaster's stream.
+    Viewers use Bits or Channel Points to have a short text message read aloud live, through
+    an OBS Browser Source overlay. Broadcasters choose their own text-to-speech provider and
+    connect it with their own API key — Bits and Channel Points transactions are handled
+    entirely by Twitch.
+  </p>
+
+  <h2>1. Supported TTS providers</h2>
+  <p>A broadcaster can connect one or more of the following, each with their own account and
+     API key:</p>
+  <div class="box">
+    ElevenLabs, TTS Monster, Microsoft Azure AI Speech, Google Cloud Text-to-Speech,
+    Amazon Polly, OpenAI, Cartesia, Fish Audio, Deepgram, LMNT
+  </div>
+
+  <h2>2. Broadcaster setup</h2>
+
+  <h3><span class="step-num">1</span>Activate the extension</h3>
+  <p>The broadcaster activates EchoLabs on their channel from the Twitch Creator Dashboard
+     (Extensions → My Extensions). Once active, Twitch shows a <strong>Configure</strong>
+     link that opens EchoLabs' own configuration panel.</p>
+
+  <h3><span class="step-num">2</span>Connect a TTS provider</h3>
+  <p>Under <strong>Settings → TTS Providers</strong>, the broadcaster picks a provider tab and
+     enters that provider's credentials (an API key for most; a region for Azure; an access
+     key pair + region for Amazon Polly). Each tab links directly to that provider's own
+     key/account page. Credentials are validated live and stored server-side only — never
+     exposed to viewers.</p>
+
+  <h3><span class="step-num">3</span>Add voices</h3>
+  <p>The broadcaster adds voices from a connected provider's voice library and assigns a Bits
+     or Channel Points amount to each — a voice can also be made free. Channel Points require
+     the channel to be connected via Twitch's own Channel Points integration, available only
+     to Affiliate/Partner channels (a Twitch platform restriction, not an EchoLabs one).</p>
+
+  <h3><span class="step-num">4</span>Customize behavior and overlay</h3>
+  <p>The broadcaster can adjust overlay appearance (colors, font, size, position,
+     transparency), set a per-message cooldown, manage a custom word blacklist on top of a
+     built-in one, restrict who may send messages (everyone, subscribers, VIPs, or
+     moderators), and optionally enable a chat bot announcement or a leaderboard of top
+     senders.</p>
+
+  <h3><span class="step-num">5</span>Add the overlay to OBS</h3>
+  <p>The configuration panel provides a unique, channel-specific Browser Source link, added in
+     OBS (or similar software) — this is where the generated audio plays and the message is
+     shown visually during the stream.</p>
+
+  <h2>3. Viewer flow</h2>
+
+  <h3><span class="step-num">1</span>Pick a voice</h3>
+  <p>The viewer panel shows the voices the broadcaster made available, each labeled with its
+     Bits/Points amount, or "Free".</p>
+
+  <h3><span class="step-num">2</span>Share identity</h3>
+  <p>The first time, the viewer is shown a <strong>Grant Permissions</strong> button, which
+     opens Twitch's own native identity-share dialog. Sharing identity is required before a
+     message can be sent — enforced on the server for every request, not just in the UI.</p>
+
+  <h3><span class="step-num">3</span>Compose and send</h3>
+  <p>The viewer types a message and confirms it through Twitch's native Bits dialog, or a
+     Channel Points redemption. An optional "Send Anonymously" checkbox (if enabled by the
+     broadcaster) hides the sender's display name on the overlay only — the server still
+     always knows who sent the message, for moderation and cooldown purposes.</p>
+
+  <h3><span class="step-num">4</span>Playback</h3>
+  <p>Within a few seconds, the message is turned into audio by the broadcaster's connected
+     provider and played through the OBS Browser Source overlay, with an animated on-screen
+     display of the message and sender.</p>
+
+  <h2>4. Data handled</h2>
+  <ul>
+    <li>Message text is sent only to the broadcaster's connected TTS provider, for synthesis —
+        not stored beyond what's needed for moderation/cooldown logic and, only if enabled,
+        a leaderboard.</li>
+    <li>Viewer identity (Twitch user ID / display name) is required to send a message, used
+        for moderation, cooldowns, and optional overlay display.</li>
+    <li>Provider API keys are entered by the broadcaster, stored server-side only, and never
+        returned in full to the browser.</li>
+  </ul>
+  <p>Full details: <a href="https://drtxy1.github.io/echolabs-privacy/privacy.html" target="_blank" rel="noopener">Privacy Policy ↗</a></p>
+
+  <footer>
+    EchoLabs · Text-to-Speech Twitch Extension
+  </footer>
+</div>
+</body>
+</html>
